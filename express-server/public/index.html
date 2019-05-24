@@ -1,0 +1,99 @@
+<!doctype html>
+
+<!-- ASSIGN OUR ANGULAR MODULE -->
+<html ng-app="meanAccount">
+<head>
+	<!-- META -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+	<title>My Bank Demo</title>
+
+	<!-- SCROLLS -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+	<style>
+		html 					{ overflow-y:scroll; }  
+		body 					{ padding-top:50px; }
+		#account-list 				{ margin-bottom:30px; }
+		#account-form 	 			{ margin-bottom:50px; }
+	</style>
+
+	<!-- SPELLS -->   
+	<!--链接各个js文件-->   
+	<script src="//cdn.bootcss.com/angular.js/1.2.16/angular.min.js"></script><!-- load angular -->
+
+	<script src="js/controllers/main.js"></script> <!-- load up our controller 后端文件-->
+	<script src="js/services/accounts.js"></script> <!-- load our account service 数据库数据格式-->
+	<script src="js/core.js"></script> <!-- load our main application -->
+
+</head>
+<!-- SET THE CONTROLLER -->
+<body ng-controller="mainController">
+	<div class="container">
+
+		<!-- HEADER AND account COUNT -->
+		<div class="jumbotron text-center">
+			<h1>This is our bank<span class="label label-info">{{ accounts.length }}</span></h1>
+		</div>
+
+		<!-- account LIST -->
+		<div id="account-list" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- LOOP OVER THE accounts IN $scope.accounts -->
+				<div class="checkbox" ng-repeat="account in accounts">
+					<label>
+						<input type="checkbox" ng-click="deleteAccount(account._id)"> {{ account.name + " " + account.balance }}
+					</label>
+				</div>
+
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+
+		<!-- FORM TO CREATE Accounts -->
+		<div id="account-form1" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<!-- BIND THIS VALUE TO createForm.name IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="input your name" ng-model="createForm.name">
+
+					</div>
+
+					<!-- createAccount() WILL CREATE NEW account -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createAccount()">Add</button>
+				</form>
+			</div>	
+		</div>		
+
+		<!-- FORM TO SAVE -->
+
+		<div id="account-form2" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<!-- BIND THIS VALUE TO saveForm.text IN ANGULAR -->
+						<input type="text" class="form-control input-lg text-center" placeholder="input name" ng-model="saveForm.name">
+						<input type="text" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.balance">
+
+					</div>
+
+					<!-- saveAccount() WILL save certain amount of money to an account -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="saveAccount()">SAVE</button>
+				</form>
+			</div>	
+		</div>		
+					
+		<div class="text-center text-muted">
+			<p>With ❤ from <a href="https://www.ibm.com/linuxone">LinuxONE</a></p>
+		</div>
+	</div>
+</body>
+</html>
