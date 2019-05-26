@@ -46,7 +46,7 @@ angular.module('accountController', [])
 				// call the save function from our service (returns a promise object)
 				Accounts.save($scope.saveForm)
 
-	// 				// if successful creation, call our get function to get all the new accounts
+	 				// if successful creation, call our get function to get all the new accounts
 					.success(function(data) {
 						$scope.loading = false;
 						$scope.saveForm = {}; // clear the form so our user is ready to enter another

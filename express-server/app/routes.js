@@ -52,10 +52,18 @@ module.exports = function (app) {
     });
 
    // save certain amount of money to an account
-
     app.post('/api/accounts/save',function(req, res){
+        currentBalance = Account.findOne({name:req.body.name},{balance:1,_id:0})["balance"];
+   //     currentBalance = currentBalance1?currentBalance1["balance"]:"0";
+        //return null?
+        currentBalanceInt = parseInt(currentBalance);
+        saveBalance = req.body.balance;
+        saveBalanceInt = parseInt(saveBalance);
+        newBalanceInt = currentBalanceInt+saveBalanceInt;
+        newBalance = newBalanceInt.toString();
+
         Account.update(
-            {name: req.body.name},{$set:{balance: req.body.balance}},
+            {name: req.body.name},{$set:{balance: newBalance}},
             function (err, account) {
             if (err)
                 res.send(err);

@@ -2,7 +2,7 @@
 
 A Node app built with MongoDB and Angular.
 
-Node (expess.js) provides the RESTful API. 
+Node (expess.js) provides the RESTful API.
 Angular.js provides the frontend and accesses the API
 MongoDB stores the data
 
@@ -41,7 +41,7 @@ MongoError: failed to connect to server [database:27017] on first connect [Mongo
     at process._tickCallback (internal/process/next_tick.js:104:9)
 ```
 
-This error means you have a mongo instance from a previous run taking up the port. You may do a ```docker-compose down``` and then ```docker-compose up``` or ```docker kill [mongo container id from docker ps.]```
+This error means you have a mongo instance from a previous run taking up the port. You may do a ```docker-compose down``` and then ```docker-compose up``` or ```docker kill [mongo container id from docker ps]```
 
 ```
 Starting meandocker_database_1 ...
