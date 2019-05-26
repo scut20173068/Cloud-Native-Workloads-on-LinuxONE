@@ -61,8 +61,7 @@
 				<form>
 					<div class="form-group">
 
-						<!-- BIND THIS VALUE TO createForm.name IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="input your name" ng-model="createForm.name">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="createForm.name">
 
 					</div>
 
@@ -79,9 +78,8 @@
 				<form>
 					<div class="form-group">
 
-						<!-- BIND THIS VALUE TO saveForm.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="input name" ng-model="saveForm.name">
-						<input type="text" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.balance">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="saveForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.amount">
 
 					</div>
 
@@ -90,7 +88,26 @@
 				</form>
 			</div>	
 		</div>		
-					
+
+		<!-- FORM TO TRANSFER -->
+
+		<div id="account-form3" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name1" ng-model="transferForm.name1">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name2" ng-model="transferForm.name2">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="transferForm.amount">
+
+					</div>
+
+					<!-- transferAccount() WILL transfer certain amount of money from account1 to account2 -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="transferAccount()">TRANSFER</button>
+				</form>
+			</div>	
+		</div>		
+		
 		<div class="text-center text-muted">
 			<p>With ❤ from <a href="https://www.ibm.com/linuxone">LinuxONE</a></p>
 		</div>
