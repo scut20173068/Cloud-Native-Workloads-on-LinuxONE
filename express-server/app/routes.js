@@ -54,7 +54,6 @@ module.exports = function (app) {
    // save certain amount of money to an account
     app.post('/api/accounts/save',function(req, res){
         currentBalance = Account.findOne({name:req.body.name},{balance:1,_id:0})["balance"];
-   //     currentBalance = currentBalance1?currentBalance1["balance"]:"0";
         //return null?
         currentBalanceInt = parseInt(currentBalance);
         saveBalance = req.body.balance;
