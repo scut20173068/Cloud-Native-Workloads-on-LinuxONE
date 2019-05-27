@@ -88,7 +88,7 @@
 				</form>
 			</div>	
 		</div>		
-
+		
 		<!-- FORM TO TRANSFER -->
 
 		<div id="account-form3" class="row">
@@ -107,6 +107,23 @@
 				</form>
 			</div>	
 		</div>		
+		
+		<!-- FORM TO WITHDRAWAL -->
+		
+		<div id="account-form4" class="row">
+			<div class="col-sm-8 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+						
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="withdrawalForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="withdrawalForm.amount">
+					</div>
+					
+					<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
+					<button type="submit" class="btn btn-primary bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
+				</form>
+			</div>
+		</div>
 		
 		<div class="text-center text-muted">
 			<p>With ❤ from <a href="https://www.ibm.com/linuxone">LinuxONE</a></p>
