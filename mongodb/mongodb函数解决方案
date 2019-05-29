@@ -1,0 +1,105 @@
+1.跑一遍这个脚本，这些函数就存到了数据库里面
+2.按最下面的方法调用这些函数即可
+
+db.system.js.insert({
+	_id : "withdraw", 
+	value : 
+	function withdraw(id, money){
+		var data = db.users.findOne({'id': id}, {'balance':1})
+		if (data != null )
+			if(data['balance'] - money >= 0){
+				db.users.update({'id': id}, {$set:{'balance': data['balance'] - money}})
+				return 'Success'
+			}
+			else
+				return 'Insufficient Balance'
+		else
+			return 'User Not Exists'
+	}
+});
+
+db.system.js.insert({
+	_id : "getBalance", 
+	value : 
+	function getBalance(id){
+		var data = db.users.findOne({'id':id}, {'balance':1})
+		if (data != null) 
+			return data['balance']
+		else 
+			return 'User Not Exists'
+	}
+});
+
+db.system.js.insert({
+	_id : "deposit", 
+	value : 
+	function deposit(id, money){
+		var data = db.users.findOne({'id': id}, {'balance':1})
+		if (data != null ){
+			db.users.update({'id': id}, {$set:{'balance': data['balance'] + money}})
+			return 'Success'
+		}
+		else
+			return 'User Not Exists'
+	}
+});
+
+db.system.js.insert({
+	_id : "transfer", 
+	value : 
+	function transfer(from, to, money){
+		var userA = db.users.findOne({'id': from})
+		var userB = db.users.findOne({'id': to})
+		if (userA != null && userB != null){
+			if(userA['balance'] - money >= 0){
+				db.users.update({'id': from}, {$set:{'balance': userA['balance'] - money}})
+				db.users.update({'id': to}, {$set:{'balance': userB['balance'] + money}})
+				db.transaction.insert({'time': ISODate(), 'fromUser': NumberInt(from), 'toUser': NumberInt(to), 'money': money})
+				return 'Success'
+			}
+			else
+				return 'Insufficient Balance'
+		}
+		else
+			return 'User Not Exists'
+	}
+});
+
+db.system.js.insert({
+	_id : "getTransactions", 
+	value : 
+	function getTransactions(id){
+		var data = db.transaction.find(
+			{$or:[
+				{'fromUser': id},{'toUser': id}
+			]}
+		)
+		return data;
+	}
+});
+
+
+使用方法
+查余额
+db.loadServerScripts();
+getBalance(2)
+存钱
+db.loadServerScripts();
+deposit(2,2000)
+取钱
+db.loadServerScripts();
+withdraw(2,200)
+转账
+db.loadServerScripts();
+transfer(2, 3, 300)
+查询转账记录
+db.loadServerScripts();
+getTransactions(2)
+
+删除已插入的脚本
+db.system.js.remove({'_id':'withdraw'})
+db.system.js.remove({'_id':'getBalance'})
+db.system.js.remove({'_id':'deposit'})
+db.system.js.remove({'_id':'transfer'})
+db.system.js.remove({'_id':'getTransactions'})
+
