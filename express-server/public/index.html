@@ -7,16 +7,25 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-	<title>My Bank Demo</title>
-
+	<title>苏黎世银行</title>
+	<link rel="icon" type="image/x-icon" href="time.ico"/>
+	
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
 		html 					{ overflow-y:scroll; }  
 		body 					{ padding-top:50px; }
+		body                    { background-image: url(timgDB90UTXY.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;}
 		#account-list 				{ margin-bottom:30px; }
-		#account-form 	 			{ margin-bottom:50px; }
+		#account-form1	 			{ margin-bottom:50px; }
+		#account-form2	 			{ margin-bottom:50px; }
+		#account-form3	 			{ margin-bottom:50px; }
+		#account-form4	 			{ margin-bottom:50px; }
+		#account-form5				{ margin-bottom:50px; }
+		#management					{ margin-bottom:50px; }
 	</style>
 
 	<!-- SPELLS -->   
@@ -34,7 +43,7 @@
 
 		<!-- HEADER AND account COUNT -->
 		<div class="jumbotron text-center">
-			<h1>This is our bank<span class="label label-info">{{ accounts.length }}</span></h1>
+			<h1>This is our Zurich Bank<span class="label label-info">{{ accounts.length }}</span></h1>
 		</div>
 
 		<!-- account LIST -->
@@ -44,7 +53,7 @@
 				<!-- LOOP OVER THE accounts IN $scope.accounts -->
 				<div class="checkbox" ng-repeat="account in accounts">
 					<label>
-						<input type="checkbox" ng-click="deleteAccount(account._id)"> {{ account.name + " " + account.balance }}
+						<input type="checkbox" ng-click="deleteAccount(account._id)"> {{ account.name + " " + account.balance + " " + account.management }}
 					</label>
 				</div>
 
@@ -57,7 +66,7 @@
 
 		<!-- FORM TO CREATE Accounts -->
 		<div id="account-form1" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<form>
 					<div class="form-group">
 
@@ -74,10 +83,10 @@
 		<!-- FORM TO SAVE -->
 
 		<div id="account-form2" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+			<div class="col-sm-4 col-sm-offset-1 text-center">
 				<form>
-					<div class="form-group">
-
+					
+                    <div class="form-group">
 						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="saveForm.name">
 						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.amount">
 
@@ -92,7 +101,7 @@
 		<!-- FORM TO TRANSFER -->
 
 		<div id="account-form3" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+			<div class="col-sm-4 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
 
@@ -111,17 +120,52 @@
 		<!-- FORM TO WITHDRAWAL -->
 		
 		<div id="account-form4" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+			<div class="col-sm-4 col-sm-offset-3 text-center">
 				<form>
 					<div class="form-group">
 						
 						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="withdrawalForm.name">
 						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="withdrawalForm.amount">
+						
 					</div>
 					
 					<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
 					<button type="submit" class="btn btn-primary bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
 				</form>
+			</div>
+		</div>
+		
+		<!-- FORM TO MANAGEMENT -->
+		
+		<div id="account-form5" class="row">
+			<div class="col-sm-4 col-sm-offset-4 text-center">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="managementForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="managementForm.amount">
+					</div>
+					
+					<!-- managementAccount() will transfer certain amount of money to management -->
+					<button type="submit" class="btn btn-primary bin-lg" ng-click="managementAccount()">TRANSFER</button>
+				</form>
+			</div>
+		</div>
+		
+		<!-- management LIST -->
+		<div id="management" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- LOOP OVER THE managements IN $scope.management -->
+				<div class="checkbox" ng-repeat="account in accounts">
+					<label>
+						<input type="checkbox" ng-click="updateAccount(account._id)"> {{ account.name + " " + account.balance + " " + account.management }}
+					</label>
+				</div>
+
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
 			</div>
 		</div>
 		

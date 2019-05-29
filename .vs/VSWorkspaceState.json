@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\express-server",
+    "\\express-server\\app",
+    "\\express-server\\app\\models",
+    "\\express-server\\config",
+    "\\express-server\\public",
+    "\\express-server\\public\\js",
+    "\\express-server\\public\\js\\controllers",
+    "\\express-server\\public\\js\\services"
+  ],
+  "SelectedNode": "\\express-server\\public\\js\\controllers\\main.js",
+  "PreviewInSolutionExplorer": false
+}
