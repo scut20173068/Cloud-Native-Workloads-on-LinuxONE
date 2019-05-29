@@ -55,7 +55,6 @@ Error
 
 
 转账(FromID, ToID, MONEY)
-var data = db.users.findOne({'id': ID_HERE}, {'balance':1})
 
 例：
 var userA = db.users.findOne({'id': 3}, {'balance':1})
@@ -64,7 +63,7 @@ if (userA != null && userB != null){
 	if(userA['balance'] - 100 >= 0){
 		db.users.update({'id': 3}, {$set:{'balance': userA['balance'] - 100}})
 		db.users.update({'id': 2}, {$set:{'balance': userB['balance'] + 100}})
-		db.transaction.insert({'time': ISODate(), 'fromUser': 3, 'toUser': 2, 'money': 100})
+		db.transaction.insert({'time': ISODate(), 'fromUser': NumberInt(3), 'toUser': NumberInt(2), 'money': 100})
          }
 }
 else
