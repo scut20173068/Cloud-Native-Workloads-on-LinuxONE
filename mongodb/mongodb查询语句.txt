@@ -1,0 +1,21 @@
+创建数据库
+use bank
+
+创建用户数据集并插入四个初始用户
+db.users.insert({'id': NumberInt(1), 'name': 'BANK RESERVE', 'balance': 1000000})
+db.users.insert({'id': NumberInt(2), 'name': 'User A', 'balance': 1000})
+db.users.insert({'id': NumberInt(3), 'name': 'User B', 'balance': 2000})
+db.users.insert({'id': NumberInt(4), 'name': 'User C', 'balance': 0})
+
+根据id查询某一用户的余额
+db.users.find({'id':ID_HERE}, {'balance':1})['balance']
+例：
+var data = db.users.findOne({'id':3}, {'balance':1})
+if (data != null) a['balance']
+else 'Error'
+返回：
+2000
+
+
+
+
