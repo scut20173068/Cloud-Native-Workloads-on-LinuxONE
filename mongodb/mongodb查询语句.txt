@@ -1,0 +1,83 @@
+创建数据库
+use bank
+
+
+创建用户数据集并插入四个初始用户
+db.users.insert({'id': NumberInt(1), 'name': 'BANK RESERVE', 'balance': 1000000})
+db.users.insert({'id': NumberInt(2), 'name': 'User A', 'balance': 1000})
+db.users.insert({'id': NumberInt(3), 'name': 'User B', 'balance': 2000})
+db.users.insert({'id': NumberInt(4), 'name': 'User C', 'balance': 0})
+
+
+根据id查询某一用户的余额(ID)
+db.users.find({'id':ID_HERE}, {'balance':1})['balance']
+例：
+var data = db.users.findOne({'id':3}, {'balance':1})
+if (data != null) data['balance']
+else 'User Not Exists'
+返回：
+2000
+
+
+存钱(ID, MONEY)
+var data = db.users.findOne({'id': ID_HERE}, {'balance':1})
+db.users.update({'id': ID_HERE}, {$set:{'balance': data['balance'] + MONEY_HERE}})
+例：
+var data = db.users.findOne({'id': 3}, {'balance':1})
+if (data != null) 
+	db.users.update({'id': 3}, {$set:{'balance': data['balance'] + 100}})
+else
+	'User Not Exists'
+返回：
+Updated 1 existing record(s) in 26ms
+或
+Error
+
+
+取钱(ID, MONEY)
+var data = db.users.findOne({'id': ID_HERE}, {'balance':1})
+db.users.update({'id': ID_HERE}, {$set:{'balance': data['balance'] - MONEY_HERE}})
+例：
+var data = db.users.findOne({'id': 3}, {'balance':1})
+if (data != null )
+	if(data['balance'] - 100 >= 0)
+		db.users.update({'id': 3}, {$set:{'balance': data['balance'] - 100}})
+	else
+		'Insufficient Balance'
+else
+	'User Not Exists'
+返回：
+Updated 1 existing record(s) in 34ms
+或
+Insufficient Balance
+或
+Error
+
+
+转账(FromID, ToID, MONEY)
+
+例：
+var userA = db.users.findOne({'id': 3}, {'balance':1})
+var userB = db.users.findOne({'id': 2}, {'balance':1})
+if (userA != null && userB != null){
+	if(userA['balance'] - 100 >= 0){
+		db.users.update({'id': 3}, {$set:{'balance': userA['balance'] - 100}})
+		db.users.update({'id': 2}, {$set:{'balance': userB['balance'] + 100}})
+		db.transaction.insert({'time': ISODate(), 'fromUser': NumberInt(3), 'toUser': NumberInt(2), 'money': 100})
+         }
+}
+else
+	'User Not Exists'
+返回：
+Updated 1 existing record(s) in 24ms
+Updated 1 existing record(s) in 26ms
+Inserted 1 record(s) in 26ms
+
+
+查询转账记录(id)
+db.transaction.find({'fromUser':ID_HERE})
+db.transaction.find({'toUser':ID_HERE})
+注意，对于转账时间需要使用.toLocaleString()方法转换时区
+例：
+db.transaction.findOne({'fromUser':ID_HERE})['time'].toLocaleString()
+
