@@ -30,6 +30,10 @@ angular.module('accountService', [])
 
 			transmanage : function(accountData){
 				return $http.post('/api/accounts/transmanage',accountData);
+			},
+
+			updateSecondAcc : function(accountData){
+				return $http.post('/api/accounts/updateSecondAcc',accountData);
 			}
 		}
 	}]);

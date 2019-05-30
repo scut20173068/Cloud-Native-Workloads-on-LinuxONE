@@ -7,6 +7,10 @@ angular.module('accountController', [])
 		$scope.transferForm = {};
 		$scope.withdrawalForm={};
 		$scope.managementForm={};
+		$scope.interest=5;
+		$scope.realInterest=0.05;
+		$scope.interestForm={};
+		$scope.inputInterestForm={};
 		$scope.loading = true;
 
 		// GET =====================================================================
@@ -111,6 +115,27 @@ angular.module('accountController', [])
 			}else{
 				alert("please complete your input");
 			}
+		};
+
+		$scope.updateSecondAccount=function(){
+			$scope.loading=true;
+			$scope.interestForm.val=$scope.realInterest;
+			$scope.interestForm.list=$scope.accounts;
+			Accounts.updateSecondAcc($scope.interestForm).success(function(data){
+				$scope.loading=false;
+				$scope.accounts=data;
+			});
+		};
+
+		$scope.updateInterest=function(){
+			$scope.loading=true;
+			if($scope.inputInterestForm.val!=undefined&&$scope.inputInterestForm.val>=0){
+				$scope.interest=$scope.inputInterestForm.val;
+				$scope.realInterest=$scope.interest/100;
+			}else{
+				alert("invalid input");
+			}
+			$scope.loading=false;
 		};
 
 		// DELETE ==================================================================

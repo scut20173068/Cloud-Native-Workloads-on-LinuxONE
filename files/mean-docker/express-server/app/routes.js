@@ -145,6 +145,17 @@ module.exports = function (app) {
             });
 	});
 
+    app.post('/api/accounts/updateSecondAcc',function(req,res){
+        for(i=0;i<req.body.list.length;i++){
+            Account.update({name:req.body.list[i].name},{$inc:{management:(req.body.val*req.body.list[i].management)}},
+                function(err,account){
+                    if(err) res.send(err);
+                }
+            );
+        }
+        getAccounts(res);
+    });
+
     // application -------------------------------------------------------------
     app.get('*', function (req, res) {
         res.sendFile(__dirname + '/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
