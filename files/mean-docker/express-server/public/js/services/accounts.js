@@ -26,6 +26,10 @@ angular.module('accountService', [])
 
 			withdraw : function(accountData){
 				return $http.post('/api/accounts/withdraw',accountData);
+			},
+
+			transmanage : function(accountData){
+				return $http.post('/api/accounts/transmanage',accountData);
 			}
 		}
 	}]);

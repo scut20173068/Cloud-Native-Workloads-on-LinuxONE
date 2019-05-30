@@ -27,6 +27,7 @@ module.exports = function (app) {
         Account.create({
             name: req.body.name,
             balance: 0,
+	    management: 0,
             done: false
         }, function (err, account) {            
             if (err)
@@ -120,6 +121,28 @@ module.exports = function (app) {
                 getAccounts(res);
             }
 	});	
+	});
+
+        app.post('/api/accounts/transmanage',function(req,res){
+            Account.findOne({name:req.body.name},function(err,doc){
+                if(doc==null){
+                    getAccounts(res);
+                }else if(req.body.amount>=0&&doc.balance>=req.body.amount){
+                    Account.update(
+                        {name:req.body.name},{$inc:{balance:(-1*req.body.amount)}},
+                        function(err,account){
+                            if(err) res.send(err);
+                        }
+                    );
+                    Account.update({name:req.body.name},{$inc:{management:(req.body.amount)}},
+                    function(err,account){
+                        if(err) res.send(err);
+                        getAccounts(res);
+                    });
+                }else{
+                    getAccounts(res);
+                }
+            });
 	});
 
     // application -------------------------------------------------------------

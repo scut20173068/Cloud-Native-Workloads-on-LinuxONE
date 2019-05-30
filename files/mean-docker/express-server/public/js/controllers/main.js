@@ -6,6 +6,7 @@ angular.module('accountController', [])
 		$scope.saveForm = {};
 		$scope.transferForm = {};
 		$scope.withdrawalForm={};
+		$scope.managementForm={};
 		$scope.loading = true;
 
 		// GET =====================================================================
@@ -35,12 +36,15 @@ angular.module('accountController', [])
 						$scope.createForm = {}; // clear the form so our user is ready to enter another
 						$scope.accounts = data; // assign our new list of accounts
 					});
+			}else{
+				alert("please complete your input");
 			}
 		};
 
 
 		
 		$scope.saveAccount = function() {
+			
 
 			// validate the saveForm to make sure that something is there
 			// if form is empty, nothing will happen
@@ -56,7 +60,9 @@ angular.module('accountController', [])
 						$scope.saveForm = {}; // clear the form so our user is ready to enter another
 						$scope.accounts = data; // assign our new list of accounts
 					});
-	 		}
+	 		}else{
+				alert("please complete your input");
+			}
 	 	};
 
 		 $scope.transferAccount = function() {
@@ -75,7 +81,9 @@ angular.module('accountController', [])
 						$scope.transferForm = {}; // clear the form so our user is ready to enter another
 						$scope.accounts = data; // assign our new list of accounts
 					});
-	 		}
+	 		}else{
+				alert("please complete your input");
+			}
 	 	};
 
 
@@ -87,10 +95,23 @@ angular.module('accountController', [])
 					$scope.withdrawalForm={};
 					$scope.accounts=data;
 				});
+			}else{
+				alert("please complete your input");
 			}
 		};
 
-
+		$scope.managementAccount=function(){
+			if($scope.managementForm.name!=undefined&&$scope.managementForm.amount!=undefined){
+				$scope.loading=true;
+				Accounts.transmanage($scope.managementForm).success(function(data){
+					$scope.loading=false;
+					$scope.managementForm={};
+					$scope.accounts=data;
+				});
+			}else{
+				alert("please complete your input");
+			}
+		};
 
 		// DELETE ==================================================================
 		// delete a account after checking it

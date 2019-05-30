@@ -10,6 +10,11 @@ module.exports = mongoose.model('Account', {
     balance: {
         type: Number,
         default: 0
+    },
+
+    management:{
+        type: Number,
+        default: 0
     }
 
 });
