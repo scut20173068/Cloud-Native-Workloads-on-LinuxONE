@@ -53,38 +53,74 @@ module.exports = function (app) {
 
    // save certain amount of money to an account
     app.post('/api/accounts/save',function(req, res){
-        Account.update(
-            {name: req.body.name},{$inc:{balance: req.body.amount}},
-            function (err, account) {
-            if (err)
-                res.send(err);
+        Account.findOne({name:req.body.name},function(err,doc){
+            if(doc==null){
+                getAccounts(res);
+            }else if(req.body.amount>=0){
+                Account.update(
+                    {name: req.body.name},{$inc:{balance: req.body.amount}},
+                    function (err, account) {
+                    if (err)
+                        res.send(err);
 
-            getAccounts(res);
-    
-        });
+                    getAccounts(res);
+            
+                });
+            }else{
+                getAccounts(res);
+            }
+	});
     });
 
     //transfer certain amount of money from account1 to account2
     app.post('/api/accounts/transfer',function(req, res){
-        Account.update(
-            {name: req.body.name1},{$inc:{balance: (-1*req.body.amount)}},
-            function (err, account) {
-            if (err)
-                res.send(err);    
+        Account.findOne({name:req.body.name1},function(err,doc){
+            if(doc==null){
+                getAccounts(res);
+            }else if(req.body.amount>=0&&doc.balance>=req.body.amount){
+                Account.findOne({name:req.body.name2},function(err,doc){
+                    if(doc==null){
+                        getAccounts(res);
+                    }else{
+                        Account.update(
+                            {name: req.body.name1},{$inc:{balance: (-1*req.body.amount)}},
+                            function (err, account) {
+                            if (err)
+                                res.send(err);    
+                        });
+                
+                        Account.update(
+                            {name: req.body.name2},{$inc:{balance: req.body.amount}},
+                            function (err, account) {
+                            if (err)
+                                res.send(err);
+                        });
+                        getAccounts(res);
+                    }
+                });
+            }else{
+                getAccounts(res);
+            }
         });
+     });
 
-        Account.update(
-            {name: req.body.name2},{$inc:{balance: req.body.amount}},
-            function (err, account) {
-            if (err)
-                res.send(err);
-
-            getAccounts(res);
-    
-        });
-
-    });
-
+	app.post('/api/accounts/withdraw',function(req,res){
+        Account.findOne({name:req.body.name},function(err,doc){
+            if(doc==null){
+                getAccounts(res);
+            }else if(req.body.amount>=0&&doc.balance>=req.body.amount){
+                Account.update(
+                    {name:req.body.name},{$inc:{balance:(-1*req.body.amount)}},
+                    function(err,account){
+                        if(err) res.send(err);
+                        getAccounts(res);
+                    }
+                );
+            }else{
+                getAccounts(res);
+            }
+	});	
+	});
 
     // application -------------------------------------------------------------
     app.get('*', function (req, res) {

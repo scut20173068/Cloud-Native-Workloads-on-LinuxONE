@@ -22,6 +22,10 @@ angular.module('accountService', [])
 
 			delete : function(id) {
 				return $http.delete('/api/accounts/' + id);
+			},
+
+			withdraw : function(accountData){
+				return $http.post('/api/accounts/withdraw',accountData);
 			}
 		}
 	}]);

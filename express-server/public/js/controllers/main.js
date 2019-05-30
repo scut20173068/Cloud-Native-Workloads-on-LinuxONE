@@ -5,6 +5,7 @@ angular.module('accountController', [])
 		$scope.createForm = {};
 		$scope.saveForm = {};
 		$scope.transferForm = {};
+		$scope.withdrawalForm={};
 		$scope.loading = true;
 
 		// GET =====================================================================
@@ -43,7 +44,7 @@ angular.module('accountController', [])
 
 			// validate the saveForm to make sure that something is there
 			// if form is empty, nothing will happen
-			if ($scope.saveForm.name != undefined) {
+			if ($scope.saveForm.name != undefined&&$scope.saveForm.amount!=undefined) {
 				$scope.loading = true;
 
 				// call the save function from our service (returns a promise object)
@@ -62,7 +63,7 @@ angular.module('accountController', [])
 
 			// validate the transferForm to make sure that something is there
 			// if form is empty, nothing will happen
-			if (($scope.transferForm.name1 != undefined)&&($scope.transferForm.name2 != undefined)) {
+			if (($scope.transferForm.name1 != undefined)&&($scope.transferForm.name2 != undefined)&&$scope.transferForm.amount!=undefined) {
 				$scope.loading = true;
 
 				// call the save function from our service (returns a promise object)
@@ -76,6 +77,18 @@ angular.module('accountController', [])
 					});
 	 		}
 	 	};
+
+
+		$scope.withdrawalAccount=function(){
+			if($scope.withdrawalForm.name!=undefined&&$scope.withdrawalForm.amount!=undefined){
+				$scope.loading=true;
+				Accounts.withdraw($scope.withdrawalForm).success(function(data){
+					$scope.loading=false;
+					$scope.withdrawalForm={};
+					$scope.accounts=data;
+				});
+			}
+		};
 
 
 
