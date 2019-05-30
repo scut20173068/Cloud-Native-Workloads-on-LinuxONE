@@ -1,29 +1,39 @@
 <!doctype html>
 
 <!-- ASSIGN OUR ANGULAR MODULE -->
-<html ng-app="meanTodo">
+<html ng-app="meanAccount">
 <head>
 	<!-- META -->
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-	<title>Node/Angular Todo App</title>
-
+	<title>苏黎世银行</title>
+	<link rel="icon" type="image/x-icon" href="time.ico"/>
+	
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
-		html 					{ overflow-y:scroll; }
+		html 					{ overflow-y:scroll; }  
 		body 					{ padding-top:50px; }
-		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
+		body                    { background-image: url(timgDB90UTXY.jpg);
+		background-repeat: no-repeat;
+		background-size: cover;}
+		#account-list 				{ margin-bottom:30px; }
+		#account-form1	 			{ margin-bottom:50px; }
+		#account-form2	 			{ margin-bottom:50px; }
+		#account-form3	 			{ margin-bottom:50px; }
+		#account-form4	 			{ margin-bottom:50px; }
+		#account-form5				{ margin-bottom:50px; }
+		#management					{ margin-bottom:50px; }
 	</style>
 
-	<!-- SPELLS -->
-	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+	<!-- SPELLS -->   
+	<!--链接各个js文件-->   
+	<script src="//cdn.bootcss.com/angular.js/1.2.16/angular.min.js"></script><!-- load angular -->
 
-	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/todos.js"></script> <!-- load our todo service -->
+	<script src="js/controllers/main.js"></script> <!-- load up our controller 后端文件-->
+	<script src="js/services/accounts.js"></script> <!-- load our account service 数据库数据格式-->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
@@ -31,19 +41,19 @@
 <body ng-controller="mainController">
 	<div class="container">
 
-		<!-- HEADER AND TODO COUNT -->
+		<!-- HEADER AND account COUNT -->
 		<div class="jumbotron text-center">
-			<h1>So many things so little time..<span class="label label-info">{{ todos.length }}</span></h1>
+			<h1>This is our Zurich Bank<span class="label label-info">{{ accounts.length }}</span></h1>
 		</div>
 
-		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
+		<!-- account LIST -->
+		<div id="account-list" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="todo in todos">
+				<!-- LOOP OVER THE accounts IN $scope.accounts -->
+				<div class="checkbox" ng-repeat="account in accounts">
 					<label>
-						<input type="checkbox" ng-click="deleteTodo(todo._id)"> {{ todo.text }}
+						<input type="checkbox" ng-click="deleteAccount(account._id)"> {{ account.name + " " + account.balance + " " + account.management }}
 					</label>
 				</div>
 
@@ -54,22 +64,111 @@
 			</div>
 		</div>
 
-		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+		<!-- FORM TO CREATE Accounts -->
+		<div id="account-form1" class="row">
+			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<form>
 					<div class="form-group">
 
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="todo's go here" ng-model="formData.text">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="createForm.name">
 
 					</div>
 
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+					<!-- createAccount() WILL CREATE NEW account -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="createAccount()">Add</button>
+				</form>
+			</div>	
+		</div>		
+
+		<!-- FORM TO SAVE -->
+
+		<div id="account-form2" class="row">
+			<div class="col-sm-4 col-sm-offset-1 text-center">
+				<form>
+					
+                    <div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="saveForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.amount">
+
+					</div>
+
+					<!-- saveAccount() WILL save certain amount of money to an account -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="saveAccount()">SAVE</button>
+				</form>
+			</div>	
+		</div>		
+		
+		<!-- FORM TO TRANSFER -->
+
+		<div id="account-form3" class="row">
+			<div class="col-sm-4 col-sm-offset-2 text-center">
+				<form>
+					<div class="form-group">
+
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name1" ng-model="transferForm.name1">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name2" ng-model="transferForm.name2">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="transferForm.amount">
+
+					</div>
+
+					<!-- transferAccount() WILL transfer certain amount of money from account1 to account2 -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="transferAccount()">TRANSFER</button>
+				</form>
+			</div>	
+		</div>		
+		
+		<!-- FORM TO WITHDRAWAL -->
+		
+		<div id="account-form4" class="row">
+			<div class="col-sm-4 col-sm-offset-3 text-center">
+				<form>
+					<div class="form-group">
+						
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="withdrawalForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="withdrawalForm.amount">
+						
+					</div>
+					
+					<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
+					<button type="submit" class="btn btn-primary bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
 				</form>
 			</div>
 		</div>
+		
+		<!-- FORM TO MANAGEMENT -->
+		
+		<div id="account-form5" class="row">
+			<div class="col-sm-4 col-sm-offset-4 text-center">
+				<form>
+					<div class="form-group">
+						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="managementForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="managementForm.amount">
+					</div>
+					
+					<!-- managementAccount() will transfer certain amount of money to management -->
+					<button type="submit" class="btn btn-primary bin-lg" ng-click="managementAccount()">TRANSFER</button>
+				</form>
+			</div>
+		</div>
+		
+		<!-- management LIST -->
+		<div id="management" class="row">
+			<div class="col-sm-4 col-sm-offset-4">
+
+				<!-- LOOP OVER THE managements IN $scope.management -->
+				<div class="checkbox" ng-repeat="account in accounts">
+					<label>
+						<input type="checkbox" ng-click="updateAccount(account._id)"> {{ account.name + " " + account.balance + " " + account.management }}
+					</label>
+				</div>
+
+				<p class="text-center" ng-show="loading">
+					<span class="fa fa-spinner fa-spin fa-3x"></span>
+				</p>
+
+			</div>
+		</div>
+		
 		<div class="text-center text-muted">
 			<p>With ❤ from <a href="https://www.ibm.com/linuxone">LinuxONE</a></p>
 		</div>

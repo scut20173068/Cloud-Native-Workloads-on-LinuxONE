@@ -1,7 +1,7 @@
 {
-  "name": "node-todo",
+  "name": "node-client",
   "version": "0.0.1",
-  "description": "Simple todo application.",
+  "description": "Simple client application.",
   "repository": "",
   "license": "MIT",
   "main": "server.js",

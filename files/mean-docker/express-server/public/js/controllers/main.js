@@ -1,50 +1,107 @@
-angular.module('todoController', [])
+angular.module('accountController', [])
 
-	// inject the Todo service factory into our controller
-	.controller('mainController', ['$scope','$http','Todos', function($scope, $http, Todos) {
-		$scope.formData = {};
+	// inject the account service factory into our controller
+	.controller('mainController', ['$scope','$http','Accounts', function($scope, $http, Accounts) {
+		$scope.createForm = {};
+		$scope.saveForm = {};
+		$scope.transferForm = {};
+		$scope.withdrawalForm={};
 		$scope.loading = true;
 
 		// GET =====================================================================
-		// when landing on the page, get all todos and show them
-		// use the service to get all the todos
-		Todos.get()
+		// when landing on the page, get all accounts and show them
+		// use the service to get all the accounts
+		Accounts.get()
 			.success(function(data) {
-				$scope.todos = data;
+				$scope.accounts = data;
 				$scope.loading = false;
 			});
 
 		// CREATE ==================================================================
 		// when submitting the add form, send the text to the node API
-		$scope.createTodo = function() {
+		$scope.createAccount = function() {
 
-			// validate the formData to make sure that something is there
+			// validate the createForm to make sure that something is there
 			// if form is empty, nothing will happen
-			if ($scope.formData.text != undefined) {
+			if ($scope.createForm.name != undefined) {
 				$scope.loading = true;
 
 				// call the create function from our service (returns a promise object)
-				Todos.create($scope.formData)
+				Accounts.create($scope.createForm)
 
-					// if successful creation, call our get function to get all the new todos
+					// if successful creation, call our get function to get all the new accounts
 					.success(function(data) {
 						$scope.loading = false;
-						$scope.formData = {}; // clear the form so our user is ready to enter another
-						$scope.todos = data; // assign our new list of todos
+						$scope.createForm = {}; // clear the form so our user is ready to enter another
+						$scope.accounts = data; // assign our new list of accounts
 					});
 			}
 		};
 
+
+		
+		$scope.saveAccount = function() {
+
+			// validate the saveForm to make sure that something is there
+			// if form is empty, nothing will happen
+			if ($scope.saveForm.name != undefined&&$scope.saveForm.amount!=undefined) {
+				$scope.loading = true;
+
+				// call the save function from our service (returns a promise object)
+				Accounts.save($scope.saveForm)
+
+	 				// if successful creation, call our get function to get all the new accounts
+					.success(function(data) {
+						$scope.loading = false;
+						$scope.saveForm = {}; // clear the form so our user is ready to enter another
+						$scope.accounts = data; // assign our new list of accounts
+					});
+	 		}
+	 	};
+
+		 $scope.transferAccount = function() {
+
+			// validate the transferForm to make sure that something is there
+			// if form is empty, nothing will happen
+			if (($scope.transferForm.name1 != undefined)&&($scope.transferForm.name2 != undefined)&&$scope.transferForm.amount!=undefined) {
+				$scope.loading = true;
+
+				// call the save function from our service (returns a promise object)
+				Accounts.transfer($scope.transferForm)
+
+	 				// if successful creation, call our get function to get all the new accounts
+					.success(function(data) {
+						$scope.loading = false;
+						$scope.transferForm = {}; // clear the form so our user is ready to enter another
+						$scope.accounts = data; // assign our new list of accounts
+					});
+	 		}
+	 	};
+
+
+		$scope.withdrawalAccount=function(){
+			if($scope.withdrawalForm.name!=undefined&&$scope.withdrawalForm.amount!=undefined){
+				$scope.loading=true;
+				Accounts.withdraw($scope.withdrawalForm).success(function(data){
+					$scope.loading=false;
+					$scope.withdrawalForm={};
+					$scope.accounts=data;
+				});
+			}
+		};
+
+
+
 		// DELETE ==================================================================
-		// delete a todo after checking it
-		$scope.deleteTodo = function(id) {
+		// delete a account after checking it
+		$scope.deleteAccount = function(id) {
 			$scope.loading = true;
 
-			Todos.delete(id)
-				// if successful creation, call our get function to get all the new todos
+			Accounts.delete(id)
+				// if successful creation, call our get function to get all the new accounts
 				.success(function(data) {
 					$scope.loading = false;
-					$scope.todos = data; // assign our new list of todos
+					$scope.accounts = data; // assign our new list of accounts
 				});
 		};
 	}]);
