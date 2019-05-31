@@ -15,19 +15,19 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<style>
 		html 					{ overflow-y:scroll; }  
-		body 					{ padding-top:50px; }
+		body 					{ padding-top:20px; }
 		body                    { background-image: url(timgDB90UTXY.jpg);
 		                          background-repeat: no-repeat;
 		                          background-size: cover;}
 		h1                      {background: #182B4D } 
 		#account-list 				{ margin-bottom:0px; }
-		#account-form1	 			{ margin-bottom:50px; }
-		#account-form2	 			{ margin-bottom:50px; }
-		#account-form3	 			{ margin-bottom:50px; }
-		#account-form4	 			{ margin-bottom:50px; }
-		#account-form5				{ margin-bottom:50px; }
-		#interest-form1				{ margin-bottom:50px; }
-		#update						{ margin-bottom:50px; }
+		#account-form1	 			{ margin-bottom:20px; }
+		#account-form2	 			{ margin-bottom:20px; }
+		#account-form3	 			{ margin-bottom:20px; }
+		#account-form4	 			{ margin-bottom:20px; }
+		#account-form5				{ margin-bottom:20px; }
+		#interest-form1				{ margin-bottom:20px; }
+		#update						{ margin-bottom:20px; }
 	</style>
 	
 	<style type="text/css">
@@ -56,12 +56,12 @@
 		<!-- HEADER AND account COUNT -->
 		<div class="jumbotron text-center">
 			<h1 align="center" style="color: #DE0C10 ; font-size: 150px">Zurich Bank<span class="label label-danger">{{ accounts.length }}</span></h1>
-			<h2>interest rate: <span class="label label-info">{{interest+"%"}}</span></h2>
+			<h1 align="center" style="color: #9A0CC9 ; font-size: 50ps">interest rate: <span class="label label-danger">{{interest+"%"}}</span></h1>
 		</div>
 
 		<!-- account LIST -->
 		<div id="account-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class="col-sm-4 col-sm-offset-0">
 
 				<!-- LOOP OVER THE accounts IN $scope.accounts -->
 				<div class="checkbox" ng-repeat="account in accounts">
@@ -179,25 +179,31 @@
 				</form>
 			</div>
 		</div>
-
+		
+		<div class="bg">
+		<h2>InterestRate</h2>
+		</div>
 		<div id="interest-form1" class="row">
-			<div class="col-sm-4 col-sm-offset-4 text-center">
+			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<form>
 					<div class="form-group">
 						<input type="number" class="form-control input-lg text-center" placeholder="input interest rate(%)" ng-model="inputInterestForm.val">
 					</div>
 					
-					<button type="submit" class="btn btn-primary bin-lg" ng-click="updateInterest()">SUBMIT</button>
+					<button type="submit" class="btn btn-success bin-lg" ng-click="updateInterest()">SUBMIT</button>
 				</form>
 			</div>
 		</div>
 		
 		<!--update the second account-->
+		<div class="bg">
+		<h2>UpdateAccount</h2>
+		</div>
 		<div id="update" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
+			<div class="col-sm-4 col-sm-offset-0">
 				<form>
 					<!-- update will update the second account of all accounts -->
-					<button type="submit" class="btn btn-primary bin-lg" ng-click="updateSecondAccount()">UPDATE</button>
+					<button type="submit" class="btn btn-success bin-lg" ng-click="updateSecondAccount()">UPDATE</button>
 				</form>
 			</div>
 		</div>
