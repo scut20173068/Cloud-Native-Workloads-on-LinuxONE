@@ -108,8 +108,7 @@ angular.module('accountController', [])
 		};
 
 		$scope.managementAccount=function(){
-            if ($scope.managementForm.name != undefined && $scope.managementForm.amount != undefined
-                && $scope.managementForm.amount >= 0) {
+            if ($scope.managementForm.name != undefined && $scope.managementForm.amount != undefined ) {
 				$scope.loading=true;
 				Accounts.transmanage($scope.managementForm).success(function(data){
 					$scope.loading=false;

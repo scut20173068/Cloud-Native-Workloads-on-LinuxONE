@@ -127,7 +127,7 @@ module.exports = function (app) {
             Account.findOne({name:req.body.name},function(err,doc){
                 if(doc==null){
                     getAccounts(res);
-                }else if(req.body.amount>=0&&doc.balance>=req.body.amount){
+                } else if (doc.balance - req.body.amount >= 0 && doc.management + req.body.amount>=0) {
                     Account.update(
                         {name:req.body.name},{$inc:{balance:(-1*req.body.amount)}},
                         function(err,account){
