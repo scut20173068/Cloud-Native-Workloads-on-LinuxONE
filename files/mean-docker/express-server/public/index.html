@@ -81,12 +81,12 @@
 			<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<label class="bg" for="create">
-				<h2>CreateAccount</h2>
+				<h2>Create Account</h2>
 				</label>
-				<input type="text" class="form-control input-lg text-center" id="create" placeholder="input account name" ng-model="createForm.name">
+				<input type="text" class="form-control input-lg text-center" id="create" placeholder="Enter account name" ng-model="createForm.name">
 
 					<!-- createAccount() WILL CREATE NEW account -->
-					<button type="submit" class="btn btn-success btn-lg " ng-click="createAccount()">Add</button>		
+					<button type="submit" class="btn btn-success btn-lg " ng-click="createAccount()">ADD</button>		
 					</div>
 
 				
@@ -95,13 +95,13 @@
 
 			<div class="col-sm-4 col-sm-offset-4 text-center">
 				<label class="bg" for="saves">
-				<h2>SaveAccount</h2>
+				<h2>Deposit Money</h2>
 				</label>
-						<input type="text" class="form-control input-lg text-center" id="saves" placeholder="input account name" ng-model="saveForm.name">
-						<input type="number" class="form-control input-lg text-center"  placeholder="input amount" ng-model="saveForm.amount">
+						<input type="text" class="form-control input-lg text-center" id="saves" placeholder="Enter account name" ng-model="saveForm.name">
+						<input type="number" class="form-control input-lg text-center"  placeholder="Enter amount" ng-model="saveForm.amount">
 						
 						<!-- saveAccount() WILL save certain amount of money to an account -->
-				<button type="submit" class="btn btn-success btn-lg" ng-click="saveAccount()">SAVE</button>
+				<button type="submit" class="btn btn-success btn-lg" ng-click="saveAccount()">DEPOSIT</button>
 			</div>
 			</div>
 			</fieldset>
@@ -116,11 +116,11 @@
 				<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<label class="bg" for="transfers">
-					<h2>TransferAccount</h2>
+					<h2>Transfer Money</h2>
 				</label>
-						<input type="text" class="form-control input-lg text-center" id="transfers" placeholder="input account name1" ng-model="transferForm.name1">
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name2" ng-model="transferForm.name2">
-						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="transferForm.amount">
+						<input type="text" class="form-control input-lg text-center" id="transfers" placeholder="Enter account name1" ng-model="transferForm.name1">
+						<input type="text" class="form-control input-lg text-center" placeholder="Enter account name2" ng-model="transferForm.name2">
+						<input type="number" class="form-control input-lg text-center" placeholder="Enter amount" ng-model="transferForm.amount">
 				
 					<!-- transferAccount() WILL transfer certain amount of money from account1 to account2 -->
 					<button type="submit" class="btn btn-success btn-lg" ng-click="transferAccount()">TRANSFER</button>
@@ -130,10 +130,10 @@
 		
 			<div class="col-sm-4 col-sm-offset-4 text-center">
 				<label class="bg" for="withdrawals">
-					<h2>WithdrawalAccount</h2>
+					<h2>Withdrawal Money</h2>
 				</label>
-						<input type="text" class="form-control input-lg text-center" id="withdrawals" placeholder="input account name" ng-model="withdrawalForm.name">
-						<input type="number" class="form-control input-lg text-center"  placeholder="input amount" ng-model="withdrawalForm.amount">
+						<input type="text" class="form-control input-lg text-center" id="withdrawals" placeholder="Enter account name" ng-model="withdrawalForm.name">
+						<input type="number" class="form-control input-lg text-center"  placeholder="Enter amount" ng-model="withdrawalForm.amount">
 						<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
 					<button type="submit" class="btn btn-success bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
 					</div>
@@ -151,20 +151,20 @@
 				<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
 				<label class="bg" for="manages">
-					<h2>ManagementAccount</h2>
+					<h2>Financing Account</h2>
 				</label>
-						<input type="text" class="form-control input-lg text-center" id = "manages" placeholder="input account name" ng-model="managementForm.name">
-						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="managementForm.amount">
+						<input type="text" class="form-control input-lg text-center" id = "manages" placeholder="Enter account name" ng-model="managementForm.name">
+						<input type="number" class="form-control input-lg text-center" placeholder="Enter amount" ng-model="managementForm.amount">
 					<!-- managementAccount() will transfer certain amount of money to management -->
 					<button type="submit" class="btn btn-success bin-lg" ng-click="managementAccount()">TRANSFER</button>
 					</div>
 		
 			<div class="col-sm-4 col-sm-offset-4 text-center">
 					<label class="bg" for="interests">
-					<h2>Interests</h2>
+					<h2>Set Interests</h2>
 				</label>
-						<input type="number" class="form-control input-lg text-center" id="interests" placeholder="input interest rate(%)" ng-model="inputInterestForm.val">
-				<button type="submit" class="btn btn-success bin-lg" ng-click="updateInterest()">SUBMIT</button>
+						<input type="number" class="form-control input-lg text-center" id="interests" placeholder="Enter interest rate(%)" ng-model="inputInterestForm.val">
+				<button type="submit" class="btn btn-success bin-lg" ng-click="updateInterest()">SET</button>
 					</div>
 				</div>
 				</fieldset>
