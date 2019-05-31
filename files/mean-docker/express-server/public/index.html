@@ -63,7 +63,7 @@
 				<!-- LOOP OVER THE accounts IN $scope.accounts -->
 				<div class="checkbox" ng-repeat="account in accounts">
 					<label>
-						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"><font size="6"> {{ account.name + " " + account.balance + " " + account.management.toFixed(2) }}</font>
+						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"><font size="6"> {{ account.name}}  {{Math.floor(account.balance *100)/100}} {{Math.floor(account.management *100)/100}}</font>
 					</label>
 				</div>
 
