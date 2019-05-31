@@ -135,6 +135,7 @@ angular.module('accountController', [])
 			}else{
 				alert("invalid input");
 			}
+			$scope.inputInterestForm={};
 			$scope.loading=false;
 		};
 
