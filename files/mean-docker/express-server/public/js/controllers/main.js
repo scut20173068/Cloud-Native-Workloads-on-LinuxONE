@@ -12,6 +12,7 @@ angular.module('accountController', [])
 		$scope.interestForm={};
 		$scope.inputInterestForm={};
 		$scope.loading = true;
+		$scope.Math = window.Math;
 
 		// GET =====================================================================
 		// when landing on the page, get all accounts and show them
