@@ -65,9 +65,9 @@
 
 				<!-- LOOP OVER THE accounts IN $scope.accounts -->
 				<div class="checkbox" ng-repeat="account in accounts">
-					<label for="account">账户属性</label>
+				
 					<label>
-						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"> {{ account.name + " " + account.balance + " " + account.management }}
+						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"><font size="6"> {{ account.name + " " + account.balance + " " + account.management }}</font>
 					</label>
 				</div>
 
