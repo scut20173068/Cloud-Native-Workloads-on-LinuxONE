@@ -22,17 +22,14 @@
 		h1                      {background: #182B4D } 
 		#account-list 				{ margin-bottom:100px; }
 		#account-form1	 			{ margin-bottom:20px; }
-		#account-form2	 			{ margin-bottom:20px; }
 		#account-form3	 			{ margin-bottom:20px; }
-		#account-form4	 			{ margin-bottom:20px; }
 		#account-form5				{ margin-bottom:20px; }
-		#interest-form1				{ margin-bottom:20px; }
 		#update						{ margin-bottom:20px; }
 	</style>
 	
 	<style type="text/css">
-		.bg{
-			width: 255px;
+				.bg{
+			width: 300px;
 			background-color: azure;
 		}
 		.bg:hover{
@@ -65,9 +62,8 @@
 
 				<!-- LOOP OVER THE accounts IN $scope.accounts -->
 				<div class="checkbox" ng-repeat="account in accounts">
-				
 					<label>
-						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"><font size="6"> {{ account.name + " " + account.balance + " " + account.management }}</font>
+						<input type="checkbox" id="account" ng-click="deleteAccount(account._id)"><font size="6"> {{ account.name + " " + account.balance + " " + account.management.toFixed(2) }}</font>
 					</label>
 				</div>
 
@@ -78,121 +74,101 @@
 			</div>
 		</div>
 		
-		<!-- FORM TO CREATE Accounts -->
-		<div class="bg">
-		<h2>CreateAccount</h2>
-		</div>
 		<div id="account-form1" class="row">
+		<form class="form-horizontal" role="form">
+		<fieldset>
+			<!-- FORM TO CREATE Accounts -->
+			<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					<div class="form-group">
-
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="createForm.name">
-
-					</div>
+				<label class="bg" for="create">
+				<h2>CreateAccount</h2>
+				</label>
+				<input type="text" class="form-control input-lg text-center" id="create" placeholder="input account name" ng-model="createForm.name">
 
 					<!-- createAccount() WILL CREATE NEW account -->
-					<button type="submit" class="btn btn-success btn-lg " ng-click="createAccount()">Add</button>
-				</form>
-			</div>	
-		</div>		
+					<button type="submit" class="btn btn-success btn-lg " ng-click="createAccount()">Add</button>		
+					</div>
+
+				
 
 		<!-- FORM TO SAVE -->
 
-		<div class="bg">
-		<h2>SaveAccount</h2>
-		</div>
-		<div id="account-form2" class="row">
-			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					
-                    <div class="form-group">
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="saveForm.name">
-						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="saveForm.amount">
-
-					</div>
-
-					<!-- saveAccount() WILL save certain amount of money to an account -->
-					<button type="submit" class="btn btn-success btn-lg" ng-click="saveAccount()">SAVE</button>
-				</form>
-			</div>	
-		</div>		
+			<div class="col-sm-4 col-sm-offset-4 text-center">
+				<label class="bg" for="saves">
+				<h2>SaveAccount</h2>
+				</label>
+						<input type="text" class="form-control input-lg text-center" id="saves" placeholder="input account name" ng-model="saveForm.name">
+						<input type="number" class="form-control input-lg text-center"  placeholder="input amount" ng-model="saveForm.amount">
+						
+						<!-- saveAccount() WILL save certain amount of money to an account -->
+				<button type="submit" class="btn btn-success btn-lg" ng-click="saveAccount()">SAVE</button>
+			</div>
+			</div>
+			</fieldset>
+			</form>
+		</div>	
 		
+		<div id="account-form3" class="row">
 		<!-- FORM TO TRANSFER -->
 
-		<div class="bg">
-		<h2>TransferAccount</h2>
-		</div>
-		<div id="account-form3" class="row">
+		<form class="form-horizontal" role="form">
+			<fieldset>
+				<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					<div class="form-group">
-
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name1" ng-model="transferForm.name1">
+				<label class="bg" for="transfers">
+					<h2>TransferAccount</h2>
+				</label>
+						<input type="text" class="form-control input-lg text-center" id="transfers" placeholder="input account name1" ng-model="transferForm.name1">
 						<input type="text" class="form-control input-lg text-center" placeholder="input account name2" ng-model="transferForm.name2">
 						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="transferForm.amount">
-
-					</div>
-
+				
 					<!-- transferAccount() WILL transfer certain amount of money from account1 to account2 -->
 					<button type="submit" class="btn btn-success btn-lg" ng-click="transferAccount()">TRANSFER</button>
-				</form>
-			</div>	
-		</div>		
+					</div>	
 		
 		<!-- FORM TO WITHDRAWAL -->
 		
-		<div class="bg">
-		<h2>WithdrawalAccount</h2>
-		</div>
-		<div id="account-form4" class="row">
-			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					<div class="form-group">
-						
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="withdrawalForm.name">
-						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="withdrawalForm.amount">
-						
+			<div class="col-sm-4 col-sm-offset-4 text-center">
+				<label class="bg" for="withdrawals">
+					<h2>WithdrawalAccount</h2>
+				</label>
+						<input type="text" class="form-control input-lg text-center" id="withdrawals" placeholder="input account name" ng-model="withdrawalForm.name">
+						<input type="number" class="form-control input-lg text-center"  placeholder="input amount" ng-model="withdrawalForm.amount">
+						<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
+					<button type="submit" class="btn btn-success bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
 					</div>
 					
-					<!-- withdrawalAccount() will withdrawal certain amount of money from account -->
-					<button type="submit" class="btn btn-success bin-lg" ng-click="withdrawalAccount()">WITHDRAWAL</button>
-				</form>
 			</div>
+				</fieldset>
+			</form>
 		</div>
 		
 		<!-- FORM TO MANAGEMENT -->
 		
-		<div class="bg">
-		<h2>ManageAccount</h2>
-		</div>
 		<div id="account-form5" class="row">
+		<form class="form-horizontal" role="form">
+			<fieldset>
+				<div class="form-group">
 			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					<div class="form-group">
-						<input type="text" class="form-control input-lg text-center" placeholder="input account name" ng-model="managementForm.name">
+				<label class="bg" for="manages">
+					<h2>ManagementAccount</h2>
+				</label>
+						<input type="text" class="form-control input-lg text-center" id = "manages" placeholder="input account name" ng-model="managementForm.name">
 						<input type="number" class="form-control input-lg text-center" placeholder="input amount" ng-model="managementForm.amount">
-					</div>
-					
 					<!-- managementAccount() will transfer certain amount of money to management -->
 					<button type="submit" class="btn btn-success bin-lg" ng-click="managementAccount()">TRANSFER</button>
-				</form>
-			</div>
-		</div>
-		
-		<div class="bg">
-		<h2>InterestRate</h2>
-		</div>
-		<div id="interest-form1" class="row">
-			<div class="col-sm-4 col-sm-offset-0 text-center">
-				<form>
-					<div class="form-group">
-						<input type="number" class="form-control input-lg text-center" placeholder="input interest rate(%)" ng-model="inputInterestForm.val">
 					</div>
-					
-					<button type="submit" class="btn btn-success bin-lg" ng-click="updateInterest()">SUBMIT</button>
-				</form>
-			</div>
+		
+			<div class="col-sm-4 col-sm-offset-4 text-center">
+					<label class="bg" for="interests">
+					<h2>Interests</h2>
+				</label>
+						<input type="number" class="form-control input-lg text-center" id="interests" placeholder="input interest rate(%)" ng-model="inputInterestForm.val">
+				<button type="submit" class="btn btn-success bin-lg" ng-click="updateInterest()">SUBMIT</button>
+					</div>
+				</div>
+				</fieldset>
+		</form>
 		</div>
 		
 		<!--update the second account-->
