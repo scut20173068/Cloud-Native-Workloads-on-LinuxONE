@@ -52,7 +52,8 @@ angular.module('accountController', [])
 
 			// validate the saveForm to make sure that something is there
 			// if form is empty, nothing will happen
-			if ($scope.saveForm.name != undefined&&$scope.saveForm.amount!=undefined) {
+            if ($scope.saveForm.name != undefined && $scope.saveForm.amount != undefined &&
+                $scope.saveForm.amount >= 0) {
 				$scope.loading = true;
 
 				// call the save function from our service (returns a promise object)
@@ -65,7 +66,7 @@ angular.module('accountController', [])
 						$scope.accounts = data; // assign our new list of accounts
 					});
 	 		}else{
-				alert("please complete your input");
+				alert("invalid input!");
 			}
 	 	};
 
@@ -73,7 +74,8 @@ angular.module('accountController', [])
 
 			// validate the transferForm to make sure that something is there
 			// if form is empty, nothing will happen
-			if (($scope.transferForm.name1 != undefined)&&($scope.transferForm.name2 != undefined)&&$scope.transferForm.amount!=undefined) {
+             if (($scope.transferForm.name1 != undefined) && ($scope.transferForm.name2 != undefined) &&
+                 $scope.transferForm.amount != undefined && $scope.transferForm.amount >= 0) {
 				$scope.loading = true;
 
 				// call the save function from our service (returns a promise object)
@@ -86,13 +88,14 @@ angular.module('accountController', [])
 						$scope.accounts = data; // assign our new list of accounts
 					});
 	 		}else{
-				alert("please complete your input");
+				alert("invalid input!");
 			}
 	 	};
 
 
 		$scope.withdrawalAccount=function(){
-			if($scope.withdrawalForm.name!=undefined&&$scope.withdrawalForm.amount!=undefined){
+            if ($scope.withdrawalForm.name != undefined && $scope.withdrawalForm.amount != undefined
+                && $scope.withdrawalForm.amount >= 0) {
 				$scope.loading=true;
 				Accounts.withdraw($scope.withdrawalForm).success(function(data){
 					$scope.loading=false;
@@ -100,12 +103,13 @@ angular.module('accountController', [])
 					$scope.accounts=data;
 				});
 			}else{
-				alert("please complete your input");
+				alert("invalid input!");
 			}
 		};
 
 		$scope.managementAccount=function(){
-			if($scope.managementForm.name!=undefined&&$scope.managementForm.amount!=undefined){
+            if ($scope.managementForm.name != undefined && $scope.managementForm.amount != undefined
+                && $scope.managementForm.amount >= 0) {
 				$scope.loading=true;
 				Accounts.transmanage($scope.managementForm).success(function(data){
 					$scope.loading=false;
@@ -113,7 +117,7 @@ angular.module('accountController', [])
 					$scope.accounts=data;
 				});
 			}else{
-				alert("please complete your input");
+				alert("invalid input!");
 			}
 		};
 
@@ -133,7 +137,7 @@ angular.module('accountController', [])
 				$scope.interest=$scope.inputInterestForm.val;
 				$scope.realInterest=$scope.interest/100;
 			}else{
-				alert("invalid input");
+				alert("invalid input!");
 			}
 			$scope.inputInterestForm={};
 			$scope.loading=false;
